@@ -31,7 +31,7 @@ async def get_start(message: types.Message):
     chat_id = message.chat.id
     pass
 
-# Help - information
+# Help - information.
 @dp.message_handler(commands=['help'])
 async def get_help(message: types.Message):
     chat_id = message.chat.id
