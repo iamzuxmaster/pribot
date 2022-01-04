@@ -8,7 +8,7 @@ def strings(user_language):
     return data[user_language]
 
 def select_language():
-    langs = {
+    langs = [
         {
             "title": "🇺🇿 O'zbek",
             "code": "uz"
@@ -21,11 +21,10 @@ def select_language():
             "title": "🇺🇸 English",
             "code": "en"
         }
-    }
-    keys = []
-    for i in langs:
-        keys.append(InlineKeyboardButton(text=i["title"], callback_data=i["code"]))
+    ]
+    keys = [
+        [InlineKeyboardButton(text=i["title"], callback_data=i["code"])]
+        for i in langs
+    ]
 
-    key = InlineKeyboardMarkup(inline_keyboard=[keys])
-
-    return key
+    return InlineKeyboardMarkup(inline_keyboard=keys)
