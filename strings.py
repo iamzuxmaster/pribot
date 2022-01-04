@@ -8,8 +8,8 @@ def strings(user_language):
 
 def select_language():
     # Please note Unused language
-    text = "🇺🇿 Iltimos tilni tanlang..."
-    text += "🇷🇺 Пожалуйста выберите язык"
-    text += "🇺🇸 Please select a language"
+    text = "🇺🇿 Iltimos tilni tanlang...\n"
+    text += "🇷🇺 Пожалуйста выберите язык...\n"
+    text += "🇺🇸 Please select a language...\n"
     # ? Ex: text += "🇹🇷 Lütfen bir dil seçin" 
     return text
