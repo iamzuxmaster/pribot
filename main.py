@@ -29,22 +29,18 @@ def keys(user_language):
 @dp.message_handler(commands=['start'])
 async def get_start(message: types.Message):
     chat_id = message.chat.id
-    pass
 
 # Help - information.
 @dp.message_handler(commands=['help'])
 async def get_help(message: types.Message):
     chat_id = message.chat.id
-    pass
 
 @dp.message_handler()
 async def get_message(message: types.Message):
     chat_id = message.chat.id
-    pass
 
 @dp.callback_query_handler()
 async def get_inline_message(callback: types.CallbackQuery):
     chat_id = callback.message.chat.id
-    pass
-
+    
 executor.start_polling(dp)
