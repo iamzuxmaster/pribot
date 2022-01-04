@@ -35,12 +35,18 @@ async def get_start(message: types.Message):
 async def get_help(message: types.Message):
     chat_id = message.chat.id
 
+# Get User Language
+@dp.callback_query_handler(text=["uz", "ru", "en"])
+async def get_language(callback: types.CallbackQuery):
+    chat_id = callback.message.chat.id
+
+# Other keyboards
 @dp.message_handler()
 async def get_message(message: types.Message):
     chat_id = message.chat.id
-
+# Other inline keyboards
 @dp.callback_query_handler()
 async def get_inline_message(callback: types.CallbackQuery):
     chat_id = callback.message.chat.id
-    
+
 executor.start_polling(dp)
