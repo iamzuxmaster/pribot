@@ -1,6 +1,7 @@
 # Global
 import json
 import jmespath
+import requests 
 
 # local
 from app import *
@@ -28,9 +29,9 @@ def touched():
 
 def request(link, params: dict = None, json: dict = None) -> dict:
     if params: 
-        request = request.post(SERVER_HOST + link, params=params).json()
+        request = requests.post(SERVER_HOST + link, params=params).json()
     elif json: 
-        request = request.post(SERVER_HOST + link, json=json).json()
+        request = requests.post(SERVER_HOST + link, json=json).json()
     return request
 
 
