@@ -1,11 +1,6 @@
-# App Config
-
 BOT_TOKEN = ''
 
-# Server
-
+HOST = ''
 SERVER_HOST = ''
-GET = '/get'
-POST = '/post'
 
-# INFO
+REDIS_STORAGE = True

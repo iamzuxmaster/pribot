@@ -1,52 +1,54 @@
-# Local
+# Global
+import json
+import jmespath
+
+# local
+from app import *
 import buttons as btn
 import strings
-from app import BOT_TOKEN, SERVER_HOST, GET, POST
-import genius
-# Global 
+
+# Aiogram
 from aiogram import types,Bot, Dispatcher, executor
-import json
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher import FSMContext 
+from aiogram.dispatcher.filters.state import State, StatesGroup
+
+storage = RedisStorage2('localhost', 6379, db=5, pool_size=10, prefix='my_fsm_key') if REDIS_STORAGE else MemoryStorage()
+
 
 bot = Bot(BOT_TOKEN, parse_mode=types.message.ParseMode.HTML)
-dp = Dispatcher(bot)
+dp = Dispatcher(bot, storage=storage)
 
-user = {}
-session = {}
-def touched(user_language):
-    with open('titles/strings.json', 'r', encoding='UTF-8') as file:
-        data = json.load(file)[user_language]
+def touched():
+    with open('titles/buttons.json', 'r', encoding='UTF-8') as file:
+        data = json.load(file)
     return data
 
-def sttrs(user_languge):
-    main_menu = ''
-    return {'main_menu': main_menu}
 
-def keys(user_language):
-    main_menu = ''
-    return {'main_menu': main_menu}
+def request(link, params: dict = None, json: dict = None) -> dict:
+    if params: 
+        request = request.post(SERVER_HOST + link, params=params).json()
+    elif json: 
+        request = request.post(SERVER_HOST + link, json=json).json()
+    return request
 
-# Start
+
 @dp.message_handler(commands=['start'])
 async def get_start(message: types.Message):
     chat_id = message.chat.id
 
-# Help - information.
 @dp.message_handler(commands=['help'])
 async def get_help(message: types.Message):
     chat_id = message.chat.id
 
-# Get User Language
 @dp.callback_query_handler(text=["uz", "ru", "en"])
 async def get_language(callback: types.CallbackQuery):
     chat_id = callback.message.chat.id
 
-# Other keyboards
-@dp.message_handler()
-async def get_message(message: types.Message):
+@dp.message_handler(content_types=["contact"])
+async def get_phone_number(message: types.Message):
     chat_id = message.chat.id
-# Other inline keyboards
-@dp.callback_query_handler()
-async def get_inline_message(callback: types.CallbackQuery):
-    chat_id = callback.message.chat.id
+
 
 executor.start_polling(dp)

@@ -7,6 +7,12 @@ def strings(user_language):
 
     return data[user_language]
 
+def style():
+    with open('titles/style.json', 'r', encoding='UTF-8') as file:
+        data = json.load(file)
+
+    return data
+
 def select_language():
     langs = [
         {
