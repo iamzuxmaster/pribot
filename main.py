@@ -21,7 +21,6 @@ dp = Dispatcher(bot, storage=storage)
 class States(StatesGroup):
     pass
 
-
 @dp.message_handler(commands=['start'])
 async def get_start(message: types.Message, state: FSMContext):
     chat_id = message.chat.id

@@ -17,7 +17,7 @@ def back(user_language):
     key = KeyboardButton(text=text)
     return key
 
-def back(user_language, callback_data):
+def back_inline(user_language, callback_data):
     text = strings(user_language=user_language)["back"]
     key = InlineKeyboardButton(text=text, callback_data=callback_data)
     return key
