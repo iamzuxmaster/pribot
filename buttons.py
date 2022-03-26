@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 import json
 
 def strings(user_language):
@@ -10,8 +10,18 @@ def strings(user_language):
 def style():
     with open('titles/style.json', 'r', encoding='UTF-8') as file:
         data = json.load(file)
-
     return data
+
+def back(user_language):
+    text = strings(user_language=user_language)["back"]
+    key = KeyboardButton(text=text)
+    return key
+
+def back(user_language, callback_data):
+    text = strings(user_language=user_language)["back"]
+    key = InlineKeyboardButton(text=text, callback_data=callback_data)
+    return key
+
 
 def select_language():
     langs = [

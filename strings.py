@@ -13,3 +13,9 @@ def select_language():
     text += "🇺🇸 Please select a language...\n"
     # ? Ex: text += "🇹🇷 Lütfen bir dil seçin" 
     return text
+
+class Errors: 
+    """
+    Error messages is here
+    """
+    pass
