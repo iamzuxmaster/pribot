@@ -8,6 +8,7 @@ import json
 def chunk(arr, size):
     return list(map(lambda x: arr[x * size:x*size+size], list(range(0, ceil(len(arr)/ size)))))
 
+
 def touched():
     with open('titles/buttons.json', 'r', encoding='UTF-8') as file:
         data = json.load(file)
