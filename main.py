@@ -10,6 +10,8 @@ from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext 
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from db.models import Users 
+
 
 storage = RedisStorage2('localhost', 6379, db=5, pool_size=10, prefix='my_fsm_key') if REDIS_STORAGE else MemoryStorage()
 
