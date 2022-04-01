@@ -4,8 +4,8 @@ from .dispatcher import Base, Session, engine
 
 session_db = Session(bind=engine)
 
-class Users(Base): 
-    __tablename__ = 'Users'
+class User(Base): 
+    __tablename__ = 'User'
     id = Column(Integer(), primary_key=True)
     telegram_id = Column(String(80), nullable=False)
     fullname=  Column(String(80), nullable=False)
@@ -21,7 +21,7 @@ class Users(Base):
 class Admin(Base): 
     __tablename__ = 'Admin'
     id = Column(Integer(), primary_key=True)
-    user_id = Column(Integer(), ForeignKey("Users.id"))
+    user_id = Column(Integer(), ForeignKey("Users.id"), nullable=True)
     date_created = Column(DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
