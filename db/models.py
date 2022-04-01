@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, DateTime, Integer, Boolean,ForeignKey
 from datetime import datetime
-from .dispatcher import Base, Session, engine, create_db
+from .dispatcher import Base, Session, engine
 
 session_db = Session(bind=engine)
 
@@ -20,5 +20,9 @@ class Users(Base):
 
 class Admin(Base): 
     __tablename__ = 'Admin'
+    id = Column(Integer(), primary_key=True)
     user_id = Column(Integer(), ForeignKey("Users.id"))
     date_created = Column(DateTime(), default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"< User: {self.fullname}, ID: {self.telegram_id}/>"

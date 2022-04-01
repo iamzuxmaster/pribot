@@ -11,6 +11,7 @@ Base = declarative_base()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 connection_string = "sqlite:///"+os.path.join(BASE_DIR, DB)
+print(connection_string)
 engine = create_engine(connection_string, echo=True)
 Session = sessionmaker()
 
@@ -42,7 +43,7 @@ def object_delete(session, model, **kwargs):
 def object_create(session, model, **kwargs):
     instance = model(**kwargs)
     session.add(instance)
-    session.commit()
+    session.commit() 
     return instance
 
     
