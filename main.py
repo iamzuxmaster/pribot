@@ -49,13 +49,26 @@ class States(StatesGroup):
 @dp.message_handler(commands=['start'], state='*')
 async def get_start(message: types.Message, state: FSMContext):
     chat_id = message.chat.id
+    user = get_or_create(session=local_session, model=User, telegram_id=chat_id)
+    local_session.commit()
+
 
 @dp.message_handler(commands=['help'], state='*')
 async def get_help(message: types.Message, state: FSMContext):
     chat_id = message.chat.id
+    text = "This bot created with <b>pribot v1</b>"
+    await bot.send_message(chat_id=chat_id, text=text)
+    
+    
 
+@dp.callback_query_handler(text=["uz", "ru", "en"], state=States.request_language)
 async def get_language(callback: types.CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
+
+    await state.finish()
+    await States.request_phone.set()
+    # or 
+    # await States.next()
 
 # Filter Number 
 @dp.message_handler(content_types=["contact"], state=States.request_phone)
@@ -63,6 +76,8 @@ async def get_phone_number(message: types.Message, state: FSMContext):
     chat_id = message.chat.id
     #! Recomended 
     # phone_number = message.contact.phone_number.replace('+', '')
+
+    await state.finish()
 
 
 executor.start_polling(dp)

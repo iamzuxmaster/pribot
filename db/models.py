@@ -8,9 +8,9 @@ class User(Base):
     __tablename__ = 'User'
     id = Column(Integer(), primary_key=True)
     telegram_id = Column(String(80), nullable=False)
-    fullname=  Column(String(80), nullable=False)
-    username = Column(String(80), nullable=False, unique=True)
-    phone = Column(Integer(), nullable=False)
+    fullname=  Column(String(80), nullable=True)
+    username = Column(String(80), nullable=True, unique=True)
+    phone = Column(Integer(), nullable=True)
     ban = Column(Boolean(), default=False)
     date_created = Column(DateTime(), default=datetime.utcnow)
 
