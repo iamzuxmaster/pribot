@@ -1,0 +1,17 @@
+{
+    "telegram":{
+        "token": ""
+    },
+    "system": {
+        "redis": {
+            "status": false,
+            "host": "",
+            "port": ""
+        }
+    },
+    "django": {
+        "status": false,
+        "host": "",
+        "port": ""
+    }
+}

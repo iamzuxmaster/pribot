@@ -21,7 +21,7 @@ class User(Base):
 class Admin(Base): 
     __tablename__ = 'Admin'
     id = Column(Integer(), primary_key=True)
-    user_id = Column(Integer(), ForeignKey("Users.id"), nullable=True)
+    user_id = Column(Integer(), ForeignKey("User.id"), nullable=True)
     date_created = Column(DateTime(), default=datetime.utcnow)
 
     def __repr__(self):

@@ -1,9 +1,5 @@
-"""
-DATABASE: sqlite3
-"""
-
 # Local Modules
-from app import *
+from app import config
 import buttons as btn
 import strings
 from genius import chunk, request, touched
@@ -21,12 +17,12 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher.filters import Filter
 
 
-storage = RedisStorage2('localhost', 6379, db=5, pool_size=10, prefix='my_fsm_key') if REDIS_STORAGE else MemoryStorage()
+storage = RedisStorage2(config()["telegram"]["token"], 6379, db=5, pool_size=10, prefix='my_fsm_key') if config()["system"]["redis"]["status"] else MemoryStorage()
 
 local_session = Session(bind=engine)
 
 
-bot = Bot(BOT_TOKEN, parse_mode=types.message.ParseMode.HTML)
+bot = Bot(config()["telegram"]["token"], parse_mode=types.message.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 
 
