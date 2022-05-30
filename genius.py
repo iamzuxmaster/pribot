@@ -1,5 +1,5 @@
 from math import ceil 
-from app import *
+from app import config
 import requests
 import json
 
@@ -16,7 +16,7 @@ def touched():
 
 def request(link, params: dict = None, json: dict = None) -> dict:
     if params: 
-        request = requests.post(SERVER_HOST + link, params=params).json()
+        request = requests.post(config()["django"]["host"] + link, params=params).json()
     elif json: 
-        request = requests.post(SERVER_HOST + link, json=json).json()
+        request = requests.post(config()["django"]["host"] + link, json=json).json()
     return request

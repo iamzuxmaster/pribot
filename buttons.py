@@ -1,5 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove
 import json
+from app import languages
 
 def strings(user_language):
     with open('titles/buttons.json', 'r', encoding='UTF-8') as file:
@@ -24,20 +25,7 @@ def back_inline(user_language, callback_data):
 
 
 def select_language():
-    langs = [
-        {
-            "title": "🇺🇿 O'zbek",
-            "code": "uz"
-        },
-        {
-            "title": "🇷🇺 Русские",
-            "code": "ru"
-        },
-        {
-            "title": "🇺🇸 English",
-            "code": "en"
-        }
-    ]
+    langs = languages()
     keys = [
         [InlineKeyboardButton(text=i["title"], callback_data=i["code"])]
         for i in langs

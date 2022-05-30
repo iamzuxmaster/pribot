@@ -1,4 +1,18 @@
 {
+    "languages": [
+        {
+            "title": "🇺🇿 O'zbek",
+            "code": "uz"
+        },
+        {
+            "title": "🇷🇺 Русские",
+            "code": "ru"
+        },
+        {
+            "title": "🇺🇸 English",
+            "code": "en"
+        }
+    ],
     "uz": {
         "back": "", 
         "Errors": {}
