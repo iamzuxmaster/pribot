@@ -1,7 +1,4 @@
 {
-    "telegram":{
-        "token": ""
-    },
     "system": {
         "version": "1.0.2",
         "redis": {
@@ -10,6 +7,11 @@
             "port": ""
         }
     },
+
+    "telegram":{
+        "token": ""
+    },
+    
     "django": {
         "status": false,
         "host": "",
