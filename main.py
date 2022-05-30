@@ -1,8 +1,9 @@
 # Local Modules
-from app import config
+from app import config, languages
 import buttons as btn
 import strings
 from genius import chunk, request, touched
+import jmespath
 
 # Database
 from db.models import User, Admin
@@ -17,7 +18,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher.filters import Filter
 
 
-storage = RedisStorage2(config()["telegram"]["token"], 6379, db=5, pool_size=10, prefix='my_fsm_key') if config()["system"]["redis"]["status"] else MemoryStorage()
+storage = RedisStorage2(config()["system"]["redis"]["host"], config()["system"]["redis"]["port"], db=5, pool_size=10, prefix='my_fsm_key') if config()["system"]["redis"]["status"] else MemoryStorage()
 
 local_session = Session(bind=engine)
 
@@ -47,17 +48,17 @@ async def get_start(message: types.Message, state: FSMContext):
     chat_id = message.chat.id
     user = get_or_create(session=local_session, model=User, telegram_id=chat_id)
     local_session.commit()
+    text = f"This bot created with <b>pribot v{config()['system']['version']}</b>"
+    await bot.send_message(chat_id=chat_id, text=text)
 
 
 @dp.message_handler(commands=['help'], state='*')
 async def get_help(message: types.Message, state: FSMContext):
     chat_id = message.chat.id
-    text = "This bot created with <b>pribot v1</b>"
-    await bot.send_message(chat_id=chat_id, text=text)
     
     
 
-@dp.callback_query_handler(text=["uz", "ru", "en"], state=States.request_language)
+@dp.callback_query_handler(lambda callback: callback.data in jmespath.search("*.code", languages()), state=States.request_language)
 async def get_language(callback: types.CallbackQuery, state: FSMContext):
     chat_id = callback.message.chat.id
 
@@ -76,4 +77,9 @@ async def get_phone_number(message: types.Message, state: FSMContext):
     await state.finish()
 
 
-executor.start_polling(dp)
+if __name__ == "__main__":
+    try:
+        executor.start_polling(dp)
+
+    except KeyboardInterrupt:
+        print("Bye")

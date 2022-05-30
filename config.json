@@ -3,6 +3,7 @@
         "token": ""
     },
     "system": {
+        "version": "1.0.2",
         "redis": {
             "status": false,
             "host": "",

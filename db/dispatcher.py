@@ -1,3 +1,4 @@
+from venv import create
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
@@ -11,7 +12,7 @@ Base = declarative_base()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 connection_string = "sqlite:///"+os.path.join(BASE_DIR, DB)
-
+print("Database: " + connection_string)
 engine = create_engine(connection_string, echo=True)
 Session = sessionmaker()
 
@@ -58,6 +59,9 @@ def objects_filter(session, model, **kwargs):
         instance = None
     return instance
 
-# # CREATE DATABASE
-# def create_db():
-#     Base.metadata.create_all(engine)
+# CREATE DATABASE
+def create_db():
+    Base.metadata.create_all(engine)
+if __name__ == "__main__":
+    create_db()
+    print("Created Database")

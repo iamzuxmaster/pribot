@@ -13,6 +13,7 @@ greenlet==1.1.2
 idna==3.3
 importlib-metadata==4.11.4
 importlib-resources==5.7.1
+jmespath==1.0.0
 Mako==1.2.0
 MarkupSafe==2.1.1
 multidict==6.0.2

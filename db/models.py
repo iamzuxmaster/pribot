@@ -7,6 +7,7 @@ session_db = Session(bind=engine)
 class User(Base): 
     __tablename__ = 'User'
     id = Column(Integer(), primary_key=True)
+    lang = Column(String(80), nullable=True)
     telegram_id = Column(String(80), nullable=False)
     fullname=  Column(String(80), nullable=True)
     username = Column(String(80), nullable=True, unique=True)
@@ -25,4 +26,4 @@ class Admin(Base):
     date_created = Column(DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return f"< User: {self.fullname}, ID: {self.telegram_id}/>"
+        return f"< User: {self.id}, ID: {self.user_id}/>"
